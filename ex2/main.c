@@ -1,11 +1,3 @@
-/* Simple send and receive C example for communicating with the
-*  Arduino echo program using UART4. 
-*
-* Written by Derek Molloy for the book "Exploring BeagleBone: Tools and 
-* Techniques for Building with Embedded Linux" by John Wiley & Sons, 2014
-* ISBN 9781118935125. Please see the file README.md in the repository root 
-* directory for copyright and GNU GPLv3 license information.            */
-
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
