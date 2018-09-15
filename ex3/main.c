@@ -22,27 +22,6 @@ void delay(unsigned int milliseconds){
 
 int main(int argc, char *argv[]){
 
-
-    // while(1){
-    //     serial_write(s, "hi 123\r\n");
-    //     system("sleep 1");
-    // }
-
-    // char cmd[128];
-
-    // led_num(10);
-    // int adc = 0;
-    // while(1){
-    //     // led_on(0);
-    //     // delay(50); 
-    //     // led_off(0);
-    //     // delay(50); 
-    //     adc = readADC(0);
-    //     printf("voltage: %d \n", adc);
-    //     delay(500);
-    // }
-
-
     serial *s;
     if (serial_open(&s, "/dev/ttyO5", 115200) == 0){
         printf("Port opened.\n");
