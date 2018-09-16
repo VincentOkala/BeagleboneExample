@@ -1,3 +1,15 @@
+/*
+ * Copyright (c) 2018 Ngo Van Tuan
+ *
+ * @Source: main.c
+ * @Author: Ngo Van Tuan
+ * @Email: tuanngo0898@gmail.com
+ * @Create At: 2018-09-16 21:18:37
+ * @Last Modified By: Ngo Van Tuan
+ * @Last Modified At: 2018-09-16 21:20:45
+ * @Description: Read a number, print out the adc value at such pin.
+ */
+
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
@@ -9,6 +21,10 @@
 
 #define MAX_BUF 100
 
+/**
+ * @brief Pause the system in milliseconds
+ * @param milliseconds Time to pause in mini seconds
+ */
 void delay(unsigned int milliseconds){
     clock_t start = clock();
     while((clock() - start) * 1000 / CLOCKS_PER_SEC < milliseconds);
