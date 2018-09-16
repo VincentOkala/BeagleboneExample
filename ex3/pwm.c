@@ -6,7 +6,7 @@
  * @Email: tuanngo0898@gmail.com
  * @Create At: 2018-09-16 20:52:11
  * @Last Modified By: Ngo Van Tuan
- * @Last Modified At: 2018-09-16 20:52:11
+ * @Last Modified At: 2018-09-16 21:22:16
  * @Description: pwm definition file.
  */
 
@@ -42,7 +42,7 @@ void export_pwms(char pwm_id){
  		return;
  	}
 
-	len = snprintf(buf, sizeof(buf), "%lu", period); //20ms period for servo
+	len = snprintf(buf, sizeof(buf), "%lu", period);
 	write(fd, buf, len);
 	close(fd);
 } 
