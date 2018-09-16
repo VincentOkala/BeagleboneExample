@@ -14,6 +14,7 @@ void delay(unsigned int milliseconds){
 
 int main(int argc, char *argv[]){
 
+    // init serial interface
     serial *s;
     if (serial_open(&s, "/dev/ttyO5", 115200) == 0){
         printf("Port opened.\n");
@@ -24,16 +25,17 @@ int main(int argc, char *argv[]){
     }
     printf("%s -> %d\n", s->port, s->fd);
 
+    // get two number and print it out
     char cmd[128];
     serial_read(s, cmd, '\r', 128);
     int number_A = atoi(cmd);
     serial_read(s, cmd, '\r', 128);
     int number_B = atoi(cmd);
-
     printf("number_A: %d\n", number_A);
     printf("number_B: %d\n", number_B);
 
     int i;
+    // infinite loop for counting number with led
     while(1){
     	for(i = number_A; i <= number_B; i++){
     		led_num(i);

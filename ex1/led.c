@@ -1,8 +1,19 @@
+/*
+ * Copyright (c) 2018 Ngo Van Tuan
+ *
+ * @Source: led.c
+ * @Author: Ngo Van Tuan
+ * @Email: tuanngo0898@gmail.com
+ * @Create At: 2018-09-16 20:50:13
+ * @Last Modified By: Ngo Van Tuan
+ * @Last Modified At: 2018-09-16 20:50:13
+ * @Description: Led definition file.
+ */
+
 #include <led.h>
 
 #define MAX_BUF 100
 
-/* *************** SET PERIOD ********************* */ 
  void led_on(char led_id){
  	int fd, len;
  	char buf[MAX_BUF]; 
@@ -14,12 +25,11 @@
  		return;
  	}
 
-	len = snprintf(buf, sizeof(buf), "%d", 1); //20ms period for servo
+	len = snprintf(buf, sizeof(buf), "%d", 1);
 	write(fd, buf, len);
 	close(fd);
 } 
 
-/* ****************SETTING DUTIES******************  */
 void led_off(char led_id){
 	int fd, len;
 	

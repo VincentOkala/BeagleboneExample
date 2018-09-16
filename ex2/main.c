@@ -16,6 +16,7 @@ void delay(unsigned int milliseconds){
 
 int main(int argc, char *argv[]){
 
+	// init serial interface
     serial *s;
     if (serial_open(&s, "/dev/ttyO5", 115200) == 0){
         printf("Port opened.\n");
@@ -26,15 +27,15 @@ int main(int argc, char *argv[]){
     }
     printf("%s -> %d\n", s->port, s->fd);
 
+    // get adc pin at which we need to read the adc value
     char cmd[128];
     serial_read(s, cmd, '\r', 128);
     char adc_pin = atoi(cmd);
     printf("adc_pin: %d\n", adc_pin);
     
     int adc_value;
-
     char buf[MAX_BUF]; 
-
+    // infinite loop for printing out the adc value of the input pin
     while(1){
         adc_value = readADC(adc_pin);
         snprintf(buf, sizeof(buf), "adc: %d \r\n", adc_value);
