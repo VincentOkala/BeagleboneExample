@@ -34,7 +34,8 @@ int main(int argc, char *argv[]){
 
 	// init serial interface
     serial *s;
-    if (serial_open(&s, "/dev/ttyO5", 115200) == 0){
+    if (serial_open(&s, "/dev/ttyO5", 115200) == 0){ //define macro of com port. Ex : #define COM_PORT_SYSFS "/dev/ttyO5"
+	    								//Define baudrate use macro 
         printf("Port opened.\n");
 
     } else {
@@ -44,13 +45,13 @@ int main(int argc, char *argv[]){
     printf("%s -> %d\n", s->port, s->fd);
 
     // get adc pin at which we need to read the adc value
-    char cmd[128];
+    char cmd[128]; // can use define macro the size of buffer here. #define MAXIMUM_SIZE_BUFFER 128
     serial_read(s, cmd, '\r', 128);
     char adc_pin = atoi(cmd);
     printf("adc_pin: %d\n", adc_pin);
     
-    int adc_value;
-    char buf[MAX_BUF]; 
+    int adc_value; // should initial variable in the top of function
+    char buf[MAX_BUF];  //good job!!!
     // infinite loop for printing out the adc value of the input pin
     while(1){
         adc_value = readADC(adc_pin);
