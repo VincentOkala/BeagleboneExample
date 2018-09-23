@@ -19,6 +19,9 @@
 #include <adc.h>
 #include <pwm.h>
 
+#define UART_PORT       "/dev/ttyO5"
+#define UART_BAUD       115200
+#define CMD_BUFF_LEN    128
 /**
  * @brief Pause the system in milliseconds
  * @param milliseconds Time to pause in mini seconds
@@ -26,8 +29,7 @@
 void delay(unsigned int milliseconds)
 {
     clock_t start = clock();
-    while ((clock() - start) * 1000 / CLOCKS_PER_SEC < milliseconds)
-        ;
+    while ((clock() - start) * 1000 / CLOCKS_PER_SEC < milliseconds);
 }
 
 int main(int argc, char *argv[])
@@ -35,7 +37,7 @@ int main(int argc, char *argv[])
 
     // init serial interface
     serial *s;
-    if (serial_open(&s, "/dev/ttyO5", 115200) == 0)
+    if (serial_open(&s, UART_PORT, UART_BAUD) == 0)
     {
         printf("Port opened.\n");
     }
@@ -47,14 +49,14 @@ int main(int argc, char *argv[])
     printf("%s -> %d\n", s->port, s->fd);
 
     // get two periods and two duty circles
-    char cmd[128];
-    serial_read(s, cmd, '\r', 128);
+    char cmd[CMD_BUFF_LEN];
+    serial_read(s, cmd, '\r', CMD_BUFF_LEN);
     int period_1 = atoi(cmd);
-    serial_read(s, cmd, '\r', 128);
+    serial_read(s, cmd, '\r', CMD_BUFF_LEN);
     int duty_1 = atoi(cmd);
-    serial_read(s, cmd, '\r', 128);
+    serial_read(s, cmd, '\r', CMD_BUFF_LEN);
     int period_2 = atoi(cmd);
-    serial_read(s, cmd, '\r', 128);
+    serial_read(s, cmd, '\r', CMD_BUFF_LEN);
     int duty_2 = atoi(cmd);
 
     // print out the input

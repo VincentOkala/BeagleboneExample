@@ -19,7 +19,11 @@
 #include <adc.h>
 #include <pwm.h>
 
-#define MAX_BUF 100
+#define ADC_BUF_LEN     100
+#define CMD_BUFF_LEN    128
+
+#define UART_PORT       "/dev/ttyO5"
+#define UART_BAUD       115200
 
 /**
  * @brief Pause the system in milliseconds
@@ -34,7 +38,7 @@ int main(int argc, char *argv[]){
 
 	// init serial interface
     serial *s;
-    if (serial_open(&s, "/dev/ttyO5", 115200) == 0){
+    if (serial_open(&s, UART_PORT, UART_BAUD) == 0){
         printf("Port opened.\n");
 
     } else {
@@ -44,13 +48,14 @@ int main(int argc, char *argv[]){
     printf("%s -> %d\n", s->port, s->fd);
 
     // get adc pin at which we need to read the adc value
-    char cmd[128];
-    serial_read(s, cmd, '\r', 128);
+    char cmd[CMD_BUFF_LEN];
+    serial_read(s, cmd, '\r', CMD_BUFF_LEN);
     char adc_pin = atoi(cmd);
     printf("adc_pin: %d\n", adc_pin);
     
     int adc_value;
-    char buf[MAX_BUF]; 
+    char buf[ADC_BUF_LEN];
+
     // infinite loop for printing out the adc value of the input pin
     while(1){
         adc_value = readADC(adc_pin);

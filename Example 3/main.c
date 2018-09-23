@@ -6,8 +6,8 @@
  * @Email: tuanngo0898@gmail.com
  * @Create At: 2018-09-16 21:19:57
  * @Last Modified By: Ngo Van Tuan
- * @Last Modified At: 2018-09-16 21:20:51
- * @Description: Count from number A to B by led.
+ * @Last Modified At: 2018-09-16 21:29:07
+ * @Description: Count from number A to B with led.
  */
 
 #include <stdio.h>
@@ -18,6 +18,10 @@
 #include <led.h>
 #include <adc.h>
 #include <pwm.h>
+
+#define UART_PORT       "/dev/ttyO5"
+#define UART_BAUD       115200
+#define CMD_BUFF_LEN    128
 
 /**
  * @brief Pause the system in milliseconds
@@ -42,10 +46,10 @@ int main(int argc, char *argv[]){
     printf("%s -> %d\n", s->port, s->fd);
 
     // get two number and print it out
-    char cmd[128];
-    serial_read(s, cmd, '\r', 128);
+    char cmd[CMD_BUFF_LEN];
+    serial_read(s, cmd, '\r', CMD_BUFF_LEN);
     int number_A = atoi(cmd);
-    serial_read(s, cmd, '\r', 128);
+    serial_read(s, cmd, '\r', CMD_BUFF_LEN);
     int number_B = atoi(cmd);
     printf("number_A: %d\n", number_A);
     printf("number_B: %d\n", number_B);
